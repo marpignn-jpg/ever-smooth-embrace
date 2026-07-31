@@ -129,7 +129,8 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function AuthenticatedApp() {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } =
+    useAuth() as any;
 
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (

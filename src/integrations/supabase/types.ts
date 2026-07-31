@@ -10,20 +10,288 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.1"
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_history: {
+        Row: {
+          created_at: string
+          download_url: string | null
+          event_id: string | null
+          event_name: string | null
+          id: string
+          last_sent_at: string
+          recipient_email: string
+          resend_count: number
+          status: string
+          subject: string | null
+          ticket_infos: Json
+          tokens: string[]
+        }
+        Insert: {
+          created_at?: string
+          download_url?: string | null
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          last_sent_at?: string
+          recipient_email: string
+          resend_count?: number
+          status?: string
+          subject?: string | null
+          ticket_infos?: Json
+          tokens?: string[]
+        }
+        Update: {
+          created_at?: string
+          download_url?: string | null
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          last_sent_at?: string
+          recipient_email?: string
+          resend_count?: number
+          status?: string
+          subject?: string | null
+          ticket_infos?: Json
+          tokens?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_history_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          apple_pay_enabled: boolean
+          artist: string | null
+          categories: string[]
+          city: string | null
+          created_at: string
+          date: string
+          face_value: number | null
+          fee_amount: number | null
+          id: string
+          image_url: string | null
+          max_tickets_per_order: number
+          name: string
+          payment_url_applepay: string | null
+          payment_url_card: string | null
+          payment_url_googlepay: string | null
+          seating_type: Database["public"]["Enums"]["seating_type"]
+          status: Database["public"]["Enums"]["event_status"]
+          total_tickets: number | null
+          updated_at: string
+          venue: string
+        }
+        Insert: {
+          apple_pay_enabled?: boolean
+          artist?: string | null
+          categories?: string[]
+          city?: string | null
+          created_at?: string
+          date: string
+          face_value?: number | null
+          fee_amount?: number | null
+          id?: string
+          image_url?: string | null
+          max_tickets_per_order?: number
+          name: string
+          payment_url_applepay?: string | null
+          payment_url_card?: string | null
+          payment_url_googlepay?: string | null
+          seating_type?: Database["public"]["Enums"]["seating_type"]
+          status?: Database["public"]["Enums"]["event_status"]
+          total_tickets?: number | null
+          updated_at?: string
+          venue: string
+        }
+        Update: {
+          apple_pay_enabled?: boolean
+          artist?: string | null
+          categories?: string[]
+          city?: string | null
+          created_at?: string
+          date?: string
+          face_value?: number | null
+          fee_amount?: number | null
+          id?: string
+          image_url?: string | null
+          max_tickets_per_order?: number
+          name?: string
+          payment_url_applepay?: string | null
+          payment_url_card?: string | null
+          payment_url_googlepay?: string | null
+          seating_type?: Database["public"]["Enums"]["seating_type"]
+          status?: Database["public"]["Enums"]["event_status"]
+          total_tickets?: number | null
+          updated_at?: string
+          venue?: string
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          amount: number
+          buyer_email: string | null
+          buyer_first_name: string | null
+          buyer_last_name: string | null
+          buyer_phone: string | null
+          created_at: string
+          event_id: string
+          id: string
+          payment_method: string | null
+          payment_url_used: string | null
+          resale_token: string | null
+          status: Database["public"]["Enums"]["order_status"]
+          ticket_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          buyer_email?: string | null
+          buyer_first_name?: string | null
+          buyer_last_name?: string | null
+          buyer_phone?: string | null
+          created_at?: string
+          event_id: string
+          id?: string
+          payment_method?: string | null
+          payment_url_used?: string | null
+          resale_token?: string | null
+          status?: Database["public"]["Enums"]["order_status"]
+          ticket_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          buyer_email?: string | null
+          buyer_first_name?: string | null
+          buyer_last_name?: string | null
+          buyer_phone?: string | null
+          created_at?: string
+          event_id?: string
+          id?: string
+          payment_method?: string | null
+          payment_url_used?: string | null
+          resale_token?: string | null
+          status?: Database["public"]["Enums"]["order_status"]
+          ticket_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tickets: {
+        Row: {
+          category: string
+          created_at: string
+          event_id: string
+          id: string
+          original_price: number | null
+          price: number
+          resale_token: string
+          seat: string | null
+          status: Database["public"]["Enums"]["ticket_status"]
+          tarif_label: string | null
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          event_id: string
+          id?: string
+          original_price?: number | null
+          price: number
+          resale_token?: string
+          seat?: string | null
+          status?: Database["public"]["Enums"]["ticket_status"]
+          tarif_label?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+          original_price?: number | null
+          price?: number
+          resale_token?: string
+          seat?: string | null
+          status?: Database["public"]["Enums"]["ticket_status"]
+          tarif_label?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      event_status: "active" | "sold_out" | "cancelled" | "draft"
+      order_status: "pending" | "paid" | "refunded" | "cancelled"
+      seating_type: "numbered" | "free"
+      ticket_status: "available" | "reserved" | "sold"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +418,12 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      event_status: ["active", "sold_out", "cancelled", "draft"],
+      order_status: ["pending", "paid", "refunded", "cancelled"],
+      seating_type: ["numbered", "free"],
+      ticket_status: ["available", "reserved", "sold"],
+    },
   },
 } as const

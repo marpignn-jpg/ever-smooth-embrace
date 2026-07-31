@@ -1,0 +1,1 @@
+ALTER TABLE public.events ADD COLUMN IF NOT EXISTS apple_pay_enabled boolean NOT NULL DEFAULT true;

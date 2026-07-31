@@ -17,7 +17,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setIsVisible(true);
           if (triggerOnce) {
             observer.unobserve(element);

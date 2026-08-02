@@ -97,7 +97,7 @@ export default function TicketCard({ pass }) {
 
       {/* QR */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '24px 22px 14px' }}>
-        <QRCodeSVG value={`https://redirectionreelax.lovable.app/verify?t=${encodeURIComponent(id || 'TICKET')}`} size={190} level="H" />
+        <QRCodeSVG value={`https://reelax-tickets.revente.app/verify?t=${encodeURIComponent(id || 'TICKET')}`} size={190} level="H" />
         <div style={{ color: '#aaa', fontSize: '11px', marginTop: '12px', letterSpacing: '1px', fontWeight: '500' }}>
           {ref}
         </div>

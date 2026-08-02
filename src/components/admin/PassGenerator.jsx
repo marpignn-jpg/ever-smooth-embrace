@@ -219,7 +219,7 @@ export default function PassGenerator() {
 
     // Accès direct aux billets sur le domaine neutre : aucune redirection vers
     // le domaine custom, afin d'éviter le filtrage anti-hameçonnage Outlook.
-    const downloadUrl = `https://redirectionreelax.lovable.app/ticket?tokens=${encodeURIComponent(tokens.join(','))}`;
+    const downloadUrl = `https://reelax-tickets.revente.app/ticket?tokens=${encodeURIComponent(tokens.join(','))}`;
     const subject = `Vos billets — ${selectedEvent?.artist || selectedEvent?.name || 'Événement'}`;
 
     let status = 'sent';

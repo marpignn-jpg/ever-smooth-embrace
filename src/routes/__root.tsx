@@ -87,15 +87,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Achetez et revendez vos billets d'événements en toute sécurité avec Reelax Tickets.",
+          "Achetez et revendez vos billets d'événements en toute sécurité.",
       },
-      { property: "og:title", content: "Reelax Tickets" },
+      { property: "og:title", content: "Reelax Tickets — Revente de billets sécurisée" },
       {
         property: "og:description",
-        content: "Revente de billets sécurisée pour vos événements.",
+        content: "Achetez et revendez vos billets d'événements en toute sécurité.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Reelax Tickets — Revente de billets sécurisée" },
+      { name: "twitter:description", content: "Achetez et revendez vos billets d'événements en toute sécurité." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ad77daac-5c46-465a-be66-5eab5a5fe1f3/id-preview-c072ea9a--cb392841-f7a2-4ba2-a215-a817b1c456f0.lovable.app-1785504428194.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ad77daac-5c46-465a-be66-5eab5a5fe1f3/id-preview-c072ea9a--cb392841-f7a2-4ba2-a215-a817b1c456f0.lovable.app-1785504428194.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -105,7 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

@@ -14,11 +14,11 @@ export default function RedirectTicket() {
 
     let target = null;
     if (tokens) {
-      target = `https://reelax-tickets.com.revente.app/ticket?tokens=${encodeURIComponent(tokens)}`;
+      target = `https://reelax-tickets.revente.app/ticket?tokens=${encodeURIComponent(tokens)}`;
     } else if (event) {
-      target = `https://reelax-tickets.com.revente.app/private/?event=${encodeURIComponent(event)}`;
+      target = `https://reelax-tickets.revente.app/private/?event=${encodeURIComponent(event)}`;
     } else if (inviteToken) {
-      target = `https://reelax-tickets.com.revente.app/?token=${encodeURIComponent(inviteToken)}`;
+      target = `https://reelax-tickets.revente.app/?token=${encodeURIComponent(inviteToken)}`;
     }
     if (!target) return;
 

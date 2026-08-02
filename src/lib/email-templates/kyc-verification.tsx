@@ -101,14 +101,11 @@ export const template = {
 
 const main = { backgroundColor: '#ffffff', fontFamily: 'Helvetica, Arial, sans-serif' }
 const container = { maxWidth: '560px', margin: '0 auto', padding: '32px 28px' }
-const brand = {
-  fontSize: '13px',
-  fontWeight: 700,
-  letterSpacing: '1px',
-  textTransform: 'uppercase' as const,
-  color: '#111111',
-  margin: '0 0 16px',
-}
+const logo = {
+  height: '40px',
+  margin: '0 0 20px',
+  display: 'inline-block',
+} as const
 const heading = { fontSize: '22px', fontWeight: 700, color: '#111111', margin: '0 0 18px' }
 const text = { fontSize: '15px', lineHeight: '24px', color: '#333333', margin: '0 0 14px' }
 const small = { fontSize: '12px', lineHeight: '20px', color: '#777777', margin: '16px 0 0' }

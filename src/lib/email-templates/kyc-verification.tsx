@@ -7,11 +7,15 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
   Text,
 } from '@react-email/components'
+
+const LOGO_URL =
+  'https://media.base44.com/images/public/6a26deb6bcfd5e626a026084/d31cad38e_image.png'
 import type { TemplateEntry } from './registry'
 
 interface Props {
@@ -28,7 +32,7 @@ const Email = ({ buyerName, eventName, kycUrl, deadline, message }: Props) => (
     <Preview>Vérification d'identité requise pour recevoir vos billets</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Text style={brand}>Reelax Tickets</Text>
+        <Img src={LOGO_URL} alt="Reelax Tickets" style={logo} />
         <Heading style={heading}>Vérification d'identité requise</Heading>
 
         <Text style={text}>Bonjour {buyerName || 'et bienvenue'},</Text>
@@ -97,14 +101,11 @@ export const template = {
 
 const main = { backgroundColor: '#ffffff', fontFamily: 'Helvetica, Arial, sans-serif' }
 const container = { maxWidth: '560px', margin: '0 auto', padding: '32px 28px' }
-const brand = {
-  fontSize: '13px',
-  fontWeight: 700,
-  letterSpacing: '1px',
-  textTransform: 'uppercase' as const,
-  color: '#111111',
-  margin: '0 0 16px',
-}
+const logo = {
+  height: '40px',
+  margin: '0 0 20px',
+  display: 'inline-block',
+} as const
 const heading = { fontSize: '22px', fontWeight: 700, color: '#111111', margin: '0 0 18px' }
 const text = { fontSize: '15px', lineHeight: '24px', color: '#333333', margin: '0 0 14px' }
 const small = { fontSize: '12px', lineHeight: '20px', color: '#777777', margin: '16px 0 0' }

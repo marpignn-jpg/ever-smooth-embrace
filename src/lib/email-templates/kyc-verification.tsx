@@ -32,7 +32,7 @@ const Email = ({ buyerName, eventName, kycUrl, deadline, message }: Props) => (
     <Preview>Vérification d'identité requise pour recevoir vos billets</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Text style={brand}>Reelax Tickets</Text>
+        <Img src={LOGO_URL} alt="Reelax Tickets" style={logo} />
         <Heading style={heading}>Vérification d'identité requise</Heading>
 
         <Text style={text}>Bonjour {buyerName || 'et bienvenue'},</Text>

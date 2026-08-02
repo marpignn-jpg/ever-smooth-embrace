@@ -99,35 +99,34 @@ export function ticketConfirmationEmail({ firstName, lastName, event, tickets, c
     : `Votre billet est confirmé.`;
 
   const content = `
-    <div style="padding:32px 32px 8px;">
+    <div style="padding:40px 40px 0;">
 
-      <p style="margin:0 0 16px;color:${BRAND_DARK};font-size:15px;line-height:1.6;">
-        ${greeting}
-      </p>
-      <p style="margin:0 0 24px;color:${BRAND_MID};font-size:15px;line-height:1.6;">
-        ${introLine}
-      </p>
+      <!-- Title -->
+      <div style="text-align:center;margin-bottom:32px;">
+        <h1 style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;color:${BRAND_DARK};font-size:24px;font-weight:700;letter-spacing:-0.3px;">${count > 1 ? 'Vos billets sont prêts' : 'Votre billet est prêt'}</h1>
+        <p style="margin:0;color:${BRAND_MID};font-size:15px;line-height:1.6;">
+          ${greeting} ${introLine}
+        </p>
+      </div>
 
-      <p style="margin:0 0 4px;color:${BRAND_DARK};font-size:16px;font-weight:600;">${eventName}</p>
-      ${day ? `<p style="margin:0 0 2px;color:${BRAND_MID};font-size:14px;">${day}${time ? ' — ' + time : ''}</p>` : ''}
-      ${venue ? `<p style="margin:0 0 24px;color:${BRAND_LIGHT};font-size:13px;">${venue}</p>` : '<div style="height:24px;"></div>'}
+      <!-- Event Card -->
+      ${eventCard(event)}
 
-      <p style="margin:0 0 24px;color:${BRAND_MID};font-size:14px;line-height:1.6;">
-        ${count > 1 ? 'Vos billets sont disponibles au téléchargement via le lien ci-dessous.' : 'Votre billet est disponible au téléchargement via le lien ci-dessous.'}
-      </p>
+      <!-- CTA -->
+      <div style="text-align:center;margin-bottom:32px;">
+        ${primaryButton(count > 1 ? 'Accéder à mes billets' : 'Accéder à mon billet', ticketLink)}
+        <p style="margin:12px 0 0;color:${BRAND_LIGHT};font-size:11px;">Lien personnel — ne le partagez pas.</p>
+      </div>
 
-      <p style="margin:0 0 32px;">
-        <a href="${ticketLink}" style="color:${BRAND_DARK};font-size:15px;font-weight:600;text-decoration:underline;">
-          ${count > 1 ? 'Accéder à mes billets' : 'Accéder à mon billet'}
-        </a>
-      </p>
-
-      <p style="margin:0 0 24px;color:${BRAND_LIGHT};font-size:13px;line-height:1.6;">
-        Merci de conserver cet email. ${count > 1 ? 'Vos billets seront requis' : 'Votre billet sera requis'} à l'entrée de l'événement.
+      <!-- Fine print -->
+      <p style="text-align:center;color:${BRAND_LIGHT};font-size:11px;margin:0 0 40px;line-height:1.6;">
+        Merci de conserver cet email. ${count > 1 ? 'Vos billets seront requis' : 'Votre billet sera requis'} à l'entrée de l'événement.<br/>
+        Revente officielle et sécurisée via <a href="https://reelax-tickets.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">Reelax Tickets</a>.
       </p>
 
     </div>
   `;
+
 
   return baseLayout(content);
 }

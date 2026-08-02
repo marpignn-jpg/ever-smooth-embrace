@@ -58,6 +58,7 @@ export default function Admin() {
           )}
           {activeTab === 'orders' && <AdminOrders />}
           {activeTab === 'pass' && <PassGenerator />}
+          {activeTab === 'kyc' && <AdminKyc />}
         </main>
       </div>
     </div>

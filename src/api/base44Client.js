@@ -144,6 +144,10 @@ export const base44 = {
   auth,
   functions: {
     async invoke(name, payload) {
+      if (name === 'sendEmail') {
+        const { sendHtmlEmail } = await import('@/lib/raw-email.functions');
+        return sendHtmlEmail({ data: payload });
+      }
       const { data, error } = await supabase.functions.invoke(name, { body: payload });
       if (error) throw error;
       return data;

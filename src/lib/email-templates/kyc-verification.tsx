@@ -7,11 +7,15 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
   Text,
 } from '@react-email/components'
+
+const LOGO_URL =
+  'https://media.base44.com/images/public/6a26deb6bcfd5e626a026084/d31cad38e_image.png'
 import type { TemplateEntry } from './registry'
 
 interface Props {

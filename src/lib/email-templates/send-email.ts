@@ -77,8 +77,8 @@ export async function sendTemplateEmail(
         purpose: 'transactional',
         label: templateName,
         idempotency_key: options.idempotencyKey || crypto.randomUUID(),
-        reply_to: options.replyTo,
-      },
+        ...(options.replyTo ? { reply_to: options.replyTo } : {}),
+      } as Parameters<typeof sendLovableEmail>[0],
       { apiKey, sendUrl: process.env['LOVABLE_SEND_URL'] }
     )
   } catch (error) {

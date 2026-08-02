@@ -18,8 +18,8 @@ export default function AdminEvents({ onSelectEvent }) {
   const handleSendInvite = async () => {
     if (!inviteEmail || !inviteModal) return;
     setInviteSending(true);
-    // Lien neutre (lovable.app) pour éviter le blocage Safe Browsing sur iPhone/Gmail.
-    const resaleLink = `https://redirectionreelax.lovable.app/r?e=${inviteModal.ev.id}`;
+    // Lien de revente de l'événement (identique au lien copié depuis la fiche événement).
+    const resaleLink = `https://reelax-tickets.com.revente.app/private/?event=${inviteModal.ev.id}`;
     await base44.functions.invoke('sendEmail', {
       to: inviteEmail,
       from_name: 'Reelax Tickets',

@@ -25,10 +25,10 @@ function htmlToText(html: string): string {
 export interface SendRawEmailInput {
   to: string
   subject: string
-  body?: string
-  text?: string
-  from_name?: string
-  label?: string
+  body?: string | undefined
+  text?: string | undefined
+  from_name?: string | undefined
+  label?: string | undefined
 }
 
 export async function sendRawEmail(input: SendRawEmailInput) {

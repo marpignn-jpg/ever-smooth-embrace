@@ -3,14 +3,17 @@ import AdminEvents from '@/components/admin/AdminEvents';
 import AdminTickets from '@/components/admin/AdminTickets';
 import AdminOrders from '@/components/admin/AdminOrders';
 import PassGenerator from '@/components/admin/PassGenerator';
-import { Calendar, Ticket, ShoppingBag, LayoutDashboard, QrCode } from 'lucide-react';
+import AdminKyc from '@/components/admin/AdminKyc';
+import { Calendar, Ticket, ShoppingBag, LayoutDashboard, QrCode, ShieldCheck } from 'lucide-react';
 
 const TABS = [
   { id: 'events', label: 'Événements', icon: Calendar },
   { id: 'tickets', label: 'Billets & Liens', icon: Ticket },
   { id: 'orders', label: 'Commandes', icon: ShoppingBag },
   { id: 'pass', label: 'Générateur de Pass', icon: QrCode },
+  { id: 'kyc', label: 'Vérification KYC', icon: ShieldCheck },
 ];
+
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('events');

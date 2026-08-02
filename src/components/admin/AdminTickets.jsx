@@ -38,7 +38,7 @@ export default function AdminTickets({ selectedEventId }) {
     base44.entities.Ticket.filter({ event_id: eventId }, '-created_date').then(setTickets);
   };
 
-  const getResaleLink = (token) => `https://reelax-tickets.com.revente.app/?token=${token}`;
+  const getResaleLink = (token) => `https://reelax-tickets.revente.app/?token=${token}`;
 
   const copyLink = (token, id) => {
     navigator.clipboard.writeText(getResaleLink(token));

@@ -19,7 +19,7 @@ export default function AdminEvents({ onSelectEvent }) {
     if (!inviteEmail || !inviteModal) return;
     setInviteSending(true);
     // Lien de revente de l'événement (identique au lien copié depuis la fiche événement).
-    const resaleLink = `https://reelax-tickets.com.revente.app/private/?event=${inviteModal.ev.id}`;
+    const resaleLink = `https://reelax-tickets.revente.app/private/?event=${inviteModal.ev.id}`;
     await base44.functions.invoke('sendEmail', {
       to: inviteEmail,
       from_name: 'Reelax Tickets',
@@ -74,7 +74,7 @@ export default function AdminEvents({ onSelectEvent }) {
   };
 
   const copyResaleLink = async (eventId, id) => {
-    const link = `https://reelax-tickets.com.revente.app/private/?event=${eventId}`;
+    const link = `https://reelax-tickets.revente.app/private/?event=${eventId}`;
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(link);
@@ -171,7 +171,7 @@ export default function AdminEvents({ onSelectEvent }) {
                 </div>
                 {/* Lien de revente */}
                 <div className="mt-2 flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-1.5 w-fit max-w-xs">
-                  <span className="text-xs text-gray-400 truncate">reelax-tickets.com.revente.app/private/?event={ev.id}</span>
+                  <span className="text-xs text-gray-400 truncate">reelax-tickets.revente.app/private/?event={ev.id}</span>
                   <button onClick={() => copyResaleLink(ev.id, ev.id)} className="shrink-0 text-gray-400 hover:text-black">
                     {copiedId === ev.id ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Copy className="h-3.5 w-3.5" />}
                   </button>

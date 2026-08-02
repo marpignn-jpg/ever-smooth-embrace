@@ -46,7 +46,7 @@ function baseLayout(content) {
             <p style="margin:0 0 4px;color:${BRAND_LIGHT};font-size:12px;letter-spacing:0.3px;text-transform:uppercase;font-weight:600;">Reelax Tickets</p>
             <p style="margin:0;color:${BRAND_LIGHT};font-size:11px;letter-spacing:0.2px;">La revente officielle et sécurisée de billets</p>
             <p style="margin:8px 0 0;color:${BRAND_LIGHT};font-size:10px;letter-spacing:0.2px;">
-              <a href="https://reelax-tickets.com.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">reelax-tickets.com.revente.app</a>
+              <a href="https://reelax-tickets.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">reelax-tickets.revente.app</a>
             </p>
           </td>
         </tr>
@@ -89,7 +89,7 @@ export function ticketConfirmationEmail({ firstName, lastName, event, tickets, c
   const { day, time } = formatEventDate(event?.date);
   const eventName = event?.artist || event?.name || 'Événement';
   const venue = [event?.venue, event?.city].filter(Boolean).join(', ');
-  const ticketLink = downloadUrl || `https://reelax-tickets.com.revente.app`;
+  const ticketLink = downloadUrl || `https://reelax-tickets.revente.app`;
 
   const ticketList = tickets || [{ category, seatInfo }];
   const count = ticketList.length;
@@ -183,7 +183,7 @@ export function resaleInviteEmail({ event, resaleLink }) {
       <!-- Fine print -->
       <p style="text-align:center;color:${BRAND_LIGHT};font-size:11px;margin:0 0 40px;line-height:1.6;">
         Cet accès privé vous a été transmis personnellement.<br/>
-        Revente officielle et sécurisée via <a href="https://reelax-tickets.com.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">Reelax Tickets</a>.
+        Revente officielle et sécurisée via <a href="https://reelax-tickets.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">Reelax Tickets</a>.
       </p>
 
     </div>

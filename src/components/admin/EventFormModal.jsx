@@ -49,7 +49,7 @@ export default function EventFormModal({ event, onClose, onSaved }) {
     setForm(f => ({ ...f, categories: f.categories.filter(c => c !== cat) }));
   };
 
-  const resaleLink = event?.id ? `https://reelax-tickets.com.revente.app/private/?event=${event.id}` : null;
+  const resaleLink = event?.id ? `https://reelax-tickets.revente.app/private/?event=${event.id}` : null;
   const copyResaleLink = () => {
     navigator.clipboard.writeText(resaleLink);
     setCopiedLink(true);

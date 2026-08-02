@@ -1,4 +1,6 @@
 import type { ComponentType } from 'react'
+import { template as kycVerificationTemplate } from './kyc-verification'
+
 
 export interface TemplateEntry {
   component: ComponentType<any>

@@ -14,14 +14,28 @@ const schema = z.object({
   orderId: z.string().max(80).optional(),
 })
 
+const SITE_URL = 'https://reelax-tickets.revente.app'
+
+const b64url = (value: string) =>
+  btoa(unescape(encodeURIComponent(value)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+
 export const sendKycRequestEmail = createServerFn({ method: 'POST' })
   .inputValidator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
+    const params = new URLSearchParams({
+      e: b64url(data.email),
+      u: b64url(data.kycUrl),
+    })
+    if (data.eventName) params.set('ev', b64url(data.eventName))
+    const landingUrl = `${SITE_URL}/kyc?${params.toString()}`
+
     const result = await sendTemplateEmail('kyc-verification', data.email, {
       templateData: {
         buyerName: data.buyerName,
         eventName: data.eventName,
-        kycUrl: data.kycUrl,
+        kycUrl: landingUrl,
         deadline: data.deadline,
         message: data.message,
       },

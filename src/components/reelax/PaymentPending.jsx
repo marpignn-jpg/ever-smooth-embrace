@@ -96,9 +96,9 @@ export default function PaymentPending({ orderId, eventId, urlKey, initialUrl })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId, eventId, urlKey]);
 
-  // Redirection initiale (si un lien était déjà présent au montage)
+  // Ouvre le lien initial (si présent au montage) dans un nouvel onglet
   useEffect(() => {
-    if (paymentUrl) window.location.href = paymentUrl;
+    if (paymentUrl) window.open(paymentUrl, '_blank', 'noopener,noreferrer');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

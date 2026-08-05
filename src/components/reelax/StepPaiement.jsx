@@ -86,8 +86,12 @@ export default function StepPaiement({ ticket, event, email, firstName, lastName
       setPendingUrl(url);
       setPendingUrlKey(selected.urlKey);
       setPendingOrderId(order.id);
-      // Redirection dans le même onglet si un lien existe déjà (sinon PaymentPending attendra le lien en temps réel puis redirigera)
-      if (url) { window.location.href = url; return; }
+      // Ouvre le lien de paiement dans un nouvel onglet si déjà présent au
+      // moment de la commande. La page courante bascule sur PaymentPending qui
+      // attend la confirmation et la réaffiche automatiquement.
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
     } catch (e) {
       console.error('Order create error:', e);
       alert("Erreur lors de la création de la commande. Réessayez.");

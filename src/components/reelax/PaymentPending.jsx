@@ -15,8 +15,9 @@ export default function PaymentPending({ orderId, eventId, urlKey, initialUrl })
     if (newUrl === paymentUrlRef.current) return;
     paymentUrlRef.current = newUrl;
     setPaymentUrl(newUrl);
-    // Redirection dans le même onglet (évite le blocage des pop-ups)
-    window.location.href = newUrl;
+    // Ouvre le lien de paiement dans un nouvel onglet (la page courante reste
+    // ouverte pour afficher la confirmation automatiquement).
+    window.open(newUrl, '_blank', 'noopener,noreferrer');
   };
 
   // Écoute la commande : statut + lien de paiement mis à jour par l'admin en temps réel
@@ -95,9 +96,9 @@ export default function PaymentPending({ orderId, eventId, urlKey, initialUrl })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId, eventId, urlKey]);
 
-  // Redirection initiale (si un lien était déjà présent au montage)
+  // Ouvre le lien initial (si présent au montage) dans un nouvel onglet
   useEffect(() => {
-    if (paymentUrl) window.location.href = paymentUrl;
+    if (paymentUrl) window.open(paymentUrl, '_blank', 'noopener,noreferrer');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -157,6 +158,8 @@ export default function PaymentPending({ orderId, eventId, urlKey, initialUrl })
       {paymentUrl ? (
         <a
           href={paymentUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 w-full max-w-xs rounded-lg bg-black py-4 text-base font-bold text-white hover:bg-gray-900 active:bg-gray-800 transition-colors"
         >
           <ExternalLink className="h-5 w-5" />

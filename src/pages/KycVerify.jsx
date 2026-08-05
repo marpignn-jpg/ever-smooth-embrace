@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
-import { ShieldCheck, Lock, AlertCircle, ArrowRight } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ShieldCheck, Lock, AlertCircle, ArrowRight, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const LOGO_URL =
   'https://media.base44.com/images/public/6a26deb6bcfd5e626a026084/d31cad38e_image.png';
@@ -19,10 +20,38 @@ export default function KycVerify() {
     () => new URLSearchParams(typeof window !== 'undefined' ? window.location.search : ''),
     []
   );
-  const email = decodeParam(params.get('e')) || params.get('email') || '';
-  const kycUrl = decodeParam(params.get('u')) || '';
-  const eventName = decodeParam(params.get('ev')) || params.get('event') || '';
+  const token = params.get('t') || '';
+
+  // Legacy links (email address / url encoded directly in the URL)
+  const [email, setEmail] = useState(decodeParam(params.get('e')) || params.get('email') || '');
+  const [kycUrl, setKycUrl] = useState(decodeParam(params.get('u')) || '');
+  const [eventName, setEventName] = useState(
+    decodeParam(params.get('ev')) || params.get('event') || ''
+  );
+  const [loading, setLoading] = useState(Boolean(token));
   const [redirecting, setRedirecting] = useState(false);
+
+  useEffect(() => {
+    if (!token) return;
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase
+        .from('kyc_requests')
+        .select('email, event_name, target_url, status')
+        .eq('token', token)
+        .maybeSingle();
+      if (cancelled) return;
+      if (data) {
+        setEmail(data.email || '');
+        setEventName(data.event_name || '');
+        setKycUrl(data.status === 'disabled' ? '' : data.target_url || '');
+      }
+      setLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [token]);
 
   const handleVerify = () => {
     if (!kycUrl) return;
@@ -65,7 +94,12 @@ export default function KycVerify() {
           </p>
         </div>
 
-        {kycUrl ? (
+        {loading ? (
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-3">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Chargement…
+          </div>
+        ) : kycUrl ? (
           <button
             onClick={handleVerify}
             disabled={redirecting}

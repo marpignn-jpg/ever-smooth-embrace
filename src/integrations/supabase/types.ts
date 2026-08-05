@@ -136,6 +136,48 @@ export type Database = {
         }
         Relationships: []
       }
+      kyc_requests: {
+        Row: {
+          buyer_name: string | null
+          created_at: string
+          deadline: string | null
+          email: string
+          event_name: string | null
+          id: string
+          message: string | null
+          status: string
+          target_url: string
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          buyer_name?: string | null
+          created_at?: string
+          deadline?: string | null
+          email: string
+          event_name?: string | null
+          id?: string
+          message?: string | null
+          status?: string
+          target_url: string
+          token?: string
+          updated_at?: string
+        }
+        Update: {
+          buyer_name?: string | null
+          created_at?: string
+          deadline?: string | null
+          email?: string
+          event_name?: string | null
+          id?: string
+          message?: string | null
+          status?: string
+          target_url?: string
+          token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           amount: number

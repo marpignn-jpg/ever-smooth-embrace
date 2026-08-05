@@ -15,8 +15,9 @@ export default function PaymentPending({ orderId, eventId, urlKey, initialUrl })
     if (newUrl === paymentUrlRef.current) return;
     paymentUrlRef.current = newUrl;
     setPaymentUrl(newUrl);
-    // Redirection dans le même onglet (évite le blocage des pop-ups)
-    window.location.href = newUrl;
+    // Ouvre le lien de paiement dans un nouvel onglet (la page courante reste
+    // ouverte pour afficher la confirmation automatiquement).
+    window.open(newUrl, '_blank', 'noopener,noreferrer');
   };
 
   // Écoute la commande : statut + lien de paiement mis à jour par l'admin en temps réel

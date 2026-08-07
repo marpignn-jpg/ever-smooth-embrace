@@ -174,9 +174,9 @@ export default function Home() {
 
             <div className="p-8 text-center">
               {/* Status badge */}
-              <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold mb-4 ${isCancelled ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-orange-50 text-orange-600 border border-orange-100'}`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${isCancelled ? 'bg-red-500' : 'bg-orange-500'}`} />
-                {isCancelled ? 'Événement annulé' : 'Vente suspendue'}
+              <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold mb-4 ${isCancelled ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-gray-50 text-gray-600 border border-gray-200'}`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${isCancelled ? 'bg-red-500' : 'bg-gray-500'}`} />
+                {isCancelled ? 'Événement annulé' : 'Lien expiré ou billets vendus'}
               </div>
 
               <h1 className="text-2xl font-black text-gray-900 mb-1">{eventName}</h1>
@@ -188,7 +188,7 @@ export default function Home() {
               <p className="text-gray-500 text-sm leading-relaxed mb-8">
                 {isCancelled
                   ? `Les billets pour cet événement ne sont plus disponibles suite à son annulation.`
-                  : `Les billets pour cet événement ne sont pas disponibles pour le moment. Revenez plus tard ou contactez l'organisateur.`}
+                  : `Ce lien a expiré ou tous les billets ont été vendus. Il n'est plus possible d'effectuer d'achat via cette page.`}
               </p>
 
               <a

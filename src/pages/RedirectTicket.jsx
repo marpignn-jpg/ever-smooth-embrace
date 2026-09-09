@@ -47,7 +47,7 @@ export default function RedirectTicket() {
           <img src={LOGO_URL} alt="Reelax Tickets" className="h-12 mx-auto mb-6 object-contain" />
 
           <h1 className="text-xl font-black text-gray-900 mb-2">
-            Préparation de vos billets
+            Chargement des billets
           </h1>
           <p className="text-sm text-gray-500 mb-8">
             Connexion sécurisée à votre espace billetterie Reelax…

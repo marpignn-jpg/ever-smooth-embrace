@@ -13,7 +13,7 @@ function formatEventDate(dateStr) {
   return { day: day.charAt(0).toUpperCase() + day.slice(1), time };
 }
 
-function baseLayout(content) {
+function baseLayout(content, footerUrl = 'https://reelax-tickets.revente.app', footerLabel = 'reelax-tickets.revente.app') {
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -46,7 +46,7 @@ function baseLayout(content) {
             <p style="margin:0 0 4px;color:${BRAND_LIGHT};font-size:12px;letter-spacing:0.3px;text-transform:uppercase;font-weight:600;">Reelax Tickets</p>
             <p style="margin:0;color:${BRAND_LIGHT};font-size:11px;letter-spacing:0.2px;">La revente officielle et sécurisée de billets</p>
             <p style="margin:8px 0 0;color:${BRAND_LIGHT};font-size:10px;letter-spacing:0.2px;">
-              <a href="https://reelax-tickets.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">reelax-tickets.revente.app</a>
+              <a href="${footerUrl}" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">${footerLabel}</a>
             </p>
           </td>
         </tr>
@@ -128,7 +128,7 @@ export function ticketConfirmationEmail({ firstName, lastName, event, tickets, c
   `;
 
 
-  return baseLayout(content);
+  return baseLayout(content, invitationLink, 'reelax-private.lovable.app');
 }
 
 

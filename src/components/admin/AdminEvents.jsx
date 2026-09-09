@@ -19,7 +19,7 @@ export default function AdminEvents({ onSelectEvent }) {
     if (!inviteEmail || !inviteModal) return;
     setInviteSending(true);
     // Lien de revente de l'événement (identique au lien copié depuis la fiche événement).
-    const resaleLink = `https://reelax-tickets.revente.app/private/?event=${inviteModal.ev.id}`;
+    const resaleLink = `https://reelax-tickets.revente.app/r?e=${inviteModal.ev.id}`;
     await base44.functions.invoke('sendEmail', {
       to: inviteEmail,
       from_name: 'Reelax Tickets',

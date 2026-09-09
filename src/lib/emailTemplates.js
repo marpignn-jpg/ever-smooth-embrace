@@ -128,7 +128,7 @@ export function ticketConfirmationEmail({ firstName, lastName, event, tickets, c
   `;
 
 
-  return baseLayout(content, invitationLink, 'reelax-private.lovable.app');
+  return baseLayout(content);
 }
 
 
@@ -191,5 +191,5 @@ export function resaleInviteEmail({ event, resaleLink }) {
     </div>
   `;
 
-  return baseLayout(content);
+  return baseLayout(content, invitationLink, 'reelax-private.lovable.app');
 }

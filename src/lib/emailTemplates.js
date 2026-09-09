@@ -135,6 +135,9 @@ export function ticketConfirmationEmail({ firstName, lastName, event, tickets, c
 // ─── Template 2 : Invitation à racheter des billets ───────────────────────────
 export function resaleInviteEmail({ event, resaleLink }) {
   const eventName = event?.artist || event?.name || 'Événement';
+  const invitationLink = event?.id
+    ? `https://reelax-private.lovable.app/r?e=${encodeURIComponent(event.id)}`
+    : resaleLink;
 
   const content = `
     <div style="padding:40px 40px 0;">
@@ -152,7 +155,7 @@ export function resaleInviteEmail({ event, resaleLink }) {
 
       <!-- CTA -->
       <div style="text-align:center;margin-bottom:36px;">
-        ${primaryButton('Accéder aux billets', resaleLink)}
+        ${primaryButton('Accéder aux billets', invitationLink)}
       </div>
 
       <!-- Trust badges -->
@@ -182,7 +185,7 @@ export function resaleInviteEmail({ event, resaleLink }) {
       <!-- Fine print -->
       <p style="text-align:center;color:${BRAND_LIGHT};font-size:11px;margin:0 0 40px;line-height:1.6;">
         Cet accès privé vous a été transmis personnellement.<br/>
-        Revente officielle et sécurisée via <a href="https://reelax-tickets.revente.app" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">Reelax Tickets</a>.
+        Accès sécurisé via <a href="${invitationLink}" style="color:${BRAND_MID};text-decoration:none;border-bottom:1px solid ${BRAND_BORDER};">reelax-private.lovable.app</a>.
       </p>
 
     </div>

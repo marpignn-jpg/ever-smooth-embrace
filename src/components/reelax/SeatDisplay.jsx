@@ -10,17 +10,58 @@ function parseSeats(raw) {
 }
 
 /**
- * Affichage "vraies places" : bloc, rang, entrée + vignettes par siège.
+ * Tente d'extraire porte / rang / sièges d'un texte libre du type
+ * « PORTE Z rang 6 place 10 11 et 12 ».
+ */
+function parseFreeText(raw) {
+  if (!raw) return null;
+  const text = String(raw).trim();
+  const normalized = text.replace(/,/g, ' ').replace(/\s+/g, ' ');
+
+  const entranceMatch = normalized.match(/(?:porte|entree|entrée|acc[eè]s|gate)\s*[:\-]?\s*([A-Za-z0-9]+)/i);
+  const rowMatch = normalized.match(/(?:rang(?:[eé]e)?|row)\s*[:\-]?\s*([A-Za-z0-9]+)/i);
+  const seatsMatch = normalized.match(/places?\s*[:\-]?\s*([0-9A-Za-z\s]+)/i);
+
+  if (!entranceMatch && !rowMatch && !seatsMatch) return null;
+
+  let seats = [];
+  if (seatsMatch) {
+    seats = seatsMatch[1]
+      .replace(/\bet\b/gi, ' ')
+      .split(/\s+/)
+      .map(s => s.trim())
+      .filter(s => /^[0-9]+[A-Za-z]?$/i.test(s));
+  }
+
+  return {
+    entrance: entranceMatch?.[1] || null,
+    row: rowMatch?.[1] || null,
+    seats,
+  };
+}
+
+/**
+ * Affichage "vraies places" : bloc, rang, entrée + chaque siège listé individuellement.
  * Retourne null si aucune information de place n'est disponible.
  */
 export default function SeatDisplay({ event, ticket }) {
   if (!event?.show_seat_numbers) return null;
 
-  const block = event.seat_block?.trim();
-  const row = event.seat_row?.trim();
-  const entrance = event.seat_entrance?.trim();
-  const seats = parseSeats(ticket?.seat || event.seat_numbers);
+  let block = event.seat_block?.trim() || null;
+  let row = event.seat_row?.trim() || null;
+  let entrance = event.seat_entrance?.trim() || null;
+  let seats = parseSeats(ticket?.seat || event.seat_numbers);
   const fallback = event.seat_details?.trim();
+
+  // Compléter à partir du texte libre si les champs structurés manquent
+  if (fallback && (!block && !row && !entrance && seats.length === 0)) {
+    const parsed = parseFreeText(fallback);
+    if (parsed && (parsed.seats.length > 0 || parsed.row || parsed.entrance)) {
+      entrance = entrance || parsed.entrance;
+      row = row || parsed.row;
+      seats = parsed.seats;
+    }
+  }
 
   if (!block && !row && !entrance && seats.length === 0) {
     if (!fallback) return null;
@@ -29,7 +70,7 @@ export default function SeatDisplay({ event, ticket }) {
   const infos = [
     block && { icon: LayoutGrid, label: 'Bloc / Tribune', value: block },
     row && { icon: Rows3, label: 'Rang', value: row },
-    entrance && { icon: DoorOpen, label: 'Entrée', value: entrance },
+    entrance && { icon: DoorOpen, label: 'Entrée / Porte', value: entrance },
   ].filter(Boolean);
 
   return (
@@ -58,21 +99,25 @@ export default function SeatDisplay({ event, ticket }) {
       )}
 
       {seats.length > 0 ? (
-        <div className="px-4 py-4">
-          <p className="text-[11px] uppercase tracking-wide text-[#999] mb-2">
-            {seats.length > 1 ? `Sièges (${seats.length})` : 'Siège'}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {seats.map((s, i) => (
-              <span
-                key={`${s}-${i}`}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-gray-900 bg-black px-3 py-2 text-sm font-bold text-white"
-              >
-                <Armchair className="h-3.5 w-3.5" />
-                {s}
+        <div className="divide-y divide-gray-100">
+          {seats.map((s, i) => (
+            <div key={`${s}-${i}`} className="flex items-center gap-3 px-4 py-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-black text-white">
+                <Armchair className="h-4 w-4" />
               </span>
-            ))}
-          </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-wide text-[#999]">
+                  {seats.length > 1 ? `Place ${i + 1} sur ${seats.length}` : 'Place'}
+                </p>
+                <p className="text-base font-bold text-foreground">
+                  {/^[0-9]+[A-Za-z]?$/i.test(s) ? `Siège ${s}` : s}
+                </p>
+              </div>
+              {row && (
+                <span className="ml-auto text-xs text-[#777]">Rang {row}</span>
+              )}
+            </div>
+          ))}
         </div>
       ) : fallback ? (
         <div className="px-4 py-4">

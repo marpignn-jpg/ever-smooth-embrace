@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Info, X } from 'lucide-react';
+import SeatDisplay from './SeatDisplay';
 
 function formatEuros(amount) {
   return `${Math.round(amount).toLocaleString('fr-FR')} €`;

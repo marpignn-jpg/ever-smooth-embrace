@@ -158,6 +158,8 @@ export default function StepCommande({ ticket, event, availableTickets = [], sel
         </div>
       )}
 
+      <SeatDisplay event={event} />
+
       <TrustRows />
 
       {showPriceModal && event?.face_value && (

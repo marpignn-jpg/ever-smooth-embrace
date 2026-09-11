@@ -84,7 +84,9 @@ export type Database = {
           payment_url_applepay: string | null
           payment_url_card: string | null
           payment_url_googlepay: string | null
+          seat_details: string | null
           seating_type: Database["public"]["Enums"]["seating_type"]
+          show_seat_numbers: boolean
           status: Database["public"]["Enums"]["event_status"]
           total_tickets: number | null
           updated_at: string
@@ -106,7 +108,9 @@ export type Database = {
           payment_url_applepay?: string | null
           payment_url_card?: string | null
           payment_url_googlepay?: string | null
+          seat_details?: string | null
           seating_type?: Database["public"]["Enums"]["seating_type"]
+          show_seat_numbers?: boolean
           status?: Database["public"]["Enums"]["event_status"]
           total_tickets?: number | null
           updated_at?: string
@@ -128,7 +132,9 @@ export type Database = {
           payment_url_applepay?: string | null
           payment_url_card?: string | null
           payment_url_googlepay?: string | null
+          seat_details?: string | null
           seating_type?: Database["public"]["Enums"]["seating_type"]
+          show_seat_numbers?: boolean
           status?: Database["public"]["Enums"]["event_status"]
           total_tickets?: number | null
           updated_at?: string

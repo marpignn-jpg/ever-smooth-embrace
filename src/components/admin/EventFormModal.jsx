@@ -355,3 +355,12 @@ function Field({ label, value, onChange, placeholder, type = 'text' }) {
     </div>
   );
 }
+function SmallField({ label, value, onChange, placeholder }) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-gray-500 mb-1">{label}</label>
+      <input type="text" value={value} onChange={onChange} placeholder={placeholder}
+        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500" />
+    </div>
+  );
+}

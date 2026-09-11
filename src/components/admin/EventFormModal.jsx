@@ -16,6 +16,8 @@ export default function EventFormModal({ event, onClose, onSaved }) {
     artist: event?.artist || '',
     categories: event?.categories || [],
     seating_type: event?.seating_type || 'numbered',
+    show_seat_numbers: event?.show_seat_numbers === true,
+    seat_details: event?.seat_details || '',
     max_tickets_per_order: event?.max_tickets_per_order ?? 4,
     total_tickets: event?.total_tickets || '',
     face_value: event?.face_value || '',

@@ -177,15 +177,28 @@ export default function EventFormModal({ event, onClose, onSaved }) {
               </button>
             </div>
             {form.show_seat_numbers && (
-              <div className="mt-3">
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Numéros de places</label>
-                <textarea
-                  rows={2}
-                  value={form.seat_details}
-                  onChange={set('seat_details')}
-                  placeholder="ex: Bloc A · Rang 12 · Places 5 et 6"
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-gray-500"
+              <div className="mt-3 space-y-3">
+                <div className="grid grid-cols-3 gap-2">
+                  <SmallField label="Bloc / Tribune" value={form.seat_block} onChange={set('seat_block')} placeholder="ex: Bloc A" />
+                  <SmallField label="Rang" value={form.seat_row} onChange={set('seat_row')} placeholder="ex: 12" />
+                  <SmallField label="Entrée / Porte" value={form.seat_entrance} onChange={set('seat_entrance')} placeholder="ex: Porte C" />
+                </div>
+                <SmallField
+                  label="Numéros de sièges (séparés par des virgules)"
+                  value={form.seat_numbers}
+                  onChange={set('seat_numbers')}
+                  placeholder="ex: 5, 6, 7"
                 />
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">Précision libre (optionnel)</label>
+                  <textarea
+                    rows={2}
+                    value={form.seat_details}
+                    onChange={set('seat_details')}
+                    placeholder="ex: Places côte à côte, accès escalier 3"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
+                  />
+                </div>
               </div>
             )}
           </div>

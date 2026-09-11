@@ -159,6 +159,37 @@ export default function EventFormModal({ event, onClose, onSaved }) {
               <option value="free">Placement libre</option>
             </select>
           </div>
+
+          {/* Numéros de places visibles avant achat */}
+          <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-700">Afficher les numéros de places</p>
+                <p className="text-xs text-gray-400">Visible par l'acheteur avant l'achat</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setForm(f => ({ ...f, show_seat_numbers: !f.show_seat_numbers }))}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${form.show_seat_numbers ? 'bg-black' : 'bg-gray-300'}`}
+                aria-pressed={form.show_seat_numbers}
+              >
+                <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${form.show_seat_numbers ? 'translate-x-5' : 'translate-x-0.5'}`} />
+              </button>
+            </div>
+            {form.show_seat_numbers && (
+              <div className="mt-3">
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Numéros de places</label>
+                <textarea
+                  rows={2}
+                  value={form.seat_details}
+                  onChange={set('seat_details')}
+                  placeholder="ex: Bloc A · Rang 12 · Places 5 et 6"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-gray-500"
+                />
+              </div>
+            )}
+          </div>
+
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Nombre de places</label>

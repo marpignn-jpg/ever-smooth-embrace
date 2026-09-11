@@ -131,6 +131,9 @@ export default function StepCommande({ ticket, event, availableTickets = [], sel
               {event.date && <p className="text-[#555]">{formatDate(event.date)}</p>}
               {event.venue && <p className="text-[#888]">{event.venue}{event.city ? ` · ${event.city}` : ''}</p>}
               <p className="text-[#888]">{seatingLabel}</p>
+              {event.show_seat_numbers && event.seat_details && (
+                <p className="font-medium text-foreground whitespace-pre-line">{event.seat_details}</p>
+              )}
               {event.total_tickets && (
                 <p className="text-[#555]">{event.total_tickets} place{event.total_tickets > 1 ? 's' : ''}</p>
               )}

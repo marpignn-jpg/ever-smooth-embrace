@@ -81,7 +81,11 @@ export default function SeatDisplay({ event, ticket }) {
           {seats.length > 1 ? 'Vos places' : 'Votre place'}
         </p>
         <span className="ml-auto rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-semibold text-[#555]">
-          {event.seating_type === 'free' ? 'Placement libre' : 'Places numérotées'}
+          {event.seating_type === 'free'
+            ? 'Placement libre'
+            : seats.length <= 1
+              ? 'Place numérotée'
+              : 'Places numérotées'}
         </span>
       </div>
 

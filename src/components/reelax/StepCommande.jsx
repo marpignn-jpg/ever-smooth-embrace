@@ -59,7 +59,9 @@ export default function StepCommande({ ticket, event, availableTickets = [], sel
     return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   };
 
-  const seatingLabel = event?.seating_type === 'free' ? 'Placement libre' : 'Places assises numérotées';
+  const seatingLabel = event?.seating_type === 'free'
+    ? 'Placement libre'
+    : (Number(event?.total_tickets) || 0) <= 1 ? 'Place assise numérotée' : 'Places assises numérotées';
 
   // Mode billet unique (via token)
   if (ticket) {

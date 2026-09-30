@@ -21,6 +21,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TicketRouteImport } from './routes/ticket'
 import { Route as VendeurRouteImport } from './routes/vendeur'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as ApiPublicTrackTokenRouteImport } from './routes/api/public/track/$token'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +84,11 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTrackTokenRoute = ApiPublicTrackTokenRouteImport.update({
+  id: '/api/public/track/$token',
+  path: '/api/public/track/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/ticket': typeof TicketRoute
   '/vendeur': typeof VendeurRoute
   '/verify': typeof VerifyRoute
+  '/api/public/track/$token': typeof ApiPublicTrackTokenRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/ticket': typeof TicketRoute
   '/vendeur': typeof VendeurRoute
   '/verify': typeof VerifyRoute
+  '/api/public/track/$token': typeof ApiPublicTrackTokenRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/ticket': typeof TicketRoute
   '/vendeur': typeof VendeurRoute
   '/verify': typeof VerifyRoute
+  '/api/public/track/$token': typeof ApiPublicTrackTokenRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/ticket'
     | '/vendeur'
     | '/verify'
+    | '/api/public/track/$token'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/ticket'
     | '/vendeur'
     | '/verify'
+    | '/api/public/track/$token'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/ticket'
     | '/vendeur'
     | '/verify'
+    | '/api/public/track/$token'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   TicketRoute: typeof TicketRoute
   VendeurRoute: typeof VendeurRoute
   VerifyRoute: typeof VerifyRoute
+  ApiPublicTrackTokenRoute: typeof ApiPublicTrackTokenRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -286,6 +299,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/track/$token': {
+      id: '/api/public/track/$token'
+      path: '/api/public/track/$token'
+      fullPath: '/api/public/track/$token'
+      preLoaderRoute: typeof ApiPublicTrackTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   TicketRoute: TicketRoute,
   VendeurRoute: VendeurRoute,
   VerifyRoute: VerifyRoute,
+  ApiPublicTrackTokenRoute: ApiPublicTrackTokenRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport

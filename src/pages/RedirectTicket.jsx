@@ -11,6 +11,19 @@ export default function RedirectTicket() {
     const tokens = params.get('t') || params.get('tokens') || params.get('token');
     const event = params.get('e') || params.get('event');
     const inviteToken = params.get('it');
+    const trackId = params.get('i');
+    if (trackId) {
+      import('@/integrations/supabase/client').then(async ({ supabase }) => {
+        const { data } = await supabase.from('invitations').select('id, opened_at, clicked_at, click_count').eq('token', trackId).maybeSingle();
+        if (!data) return;
+        const now = new Date().toISOString();
+        await supabase.from('invitations').update({
+          clicked_at: data.clicked_at ?? now,
+          opened_at: data.opened_at ?? now,
+          click_count: (data.click_count || 0) + 1,
+        }).eq('id', data.id);
+      }).catch(() => {});
+    }
 
     let target = null;
     if (tokens) {

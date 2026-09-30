@@ -18,13 +18,26 @@ export default function AdminEvents({ onSelectEvent }) {
   const handleSendInvite = async () => {
     if (!inviteEmail || !inviteModal) return;
     setInviteSending(true);
-    // Lien de revente de l'événement (identique au lien copié depuis la fiche événement).
-    const resaleLink = `https://reelax-private.lovable.app/r?e=${inviteModal.ev.id}`;
+    const ev = inviteModal.ev;
+    let track = null;
+    try {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { data } = await supabase.from('invitations')
+        .insert({ email: inviteEmail, event_id: ev.id, event_name: ev.artist || ev.name })
+        .select('token').single();
+      track = data?.token;
+    } catch (e) { console.error('Invitation tracking error:', e); }
+    const resaleLink = `https://reelax-private.lovable.app/r?e=${ev.id}${track ? `&i=${track}` : ''}`;
+    let body = resaleInviteEmail({ event: ev, resaleLink });
+    if (track) {
+      const pixel = `<img src="https://reelax-private.lovable.app/api/public/track/${track}" width="1" height="1" alt="" style="display:block;width:1px;height:1px;border:0;" />`;
+      body = body.includes('</body>') ? body.replace('</body>', `${pixel}</body>`) : body + pixel;
+    }
     await base44.functions.invoke('sendEmail', {
       to: inviteEmail,
       from_name: 'Reelax Tickets',
-      subject: `Accès privé — Billets disponibles · ${inviteModal.ev.artist || inviteModal.ev.name}`,
-      body: resaleInviteEmail({ event: inviteModal.ev, resaleLink }),
+      subject: `Accès privé — Billets disponibles · ${ev.artist || ev.name}`,
+      body,
     });
     setInviteSending(false);
     setInviteSent(true);

@@ -154,6 +154,53 @@ export type Database = {
         }
         Relationships: []
       }
+      invitations: {
+        Row: {
+          click_count: number
+          clicked_at: string | null
+          created_at: string
+          email: string
+          event_id: string | null
+          event_name: string | null
+          id: string
+          open_count: number
+          opened_at: string | null
+          token: string
+        }
+        Insert: {
+          click_count?: number
+          clicked_at?: string | null
+          created_at?: string
+          email: string
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          open_count?: number
+          opened_at?: string | null
+          token?: string
+        }
+        Update: {
+          click_count?: number
+          clicked_at?: string | null
+          created_at?: string
+          email?: string
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          open_count?: number
+          opened_at?: string | null
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invitations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       kyc_requests: {
         Row: {
           buyer_name: string | null
